@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle on Click</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        #clickableDiv {
+            width: 400px;
+            height: 400px;
+            background-color: lightblue;
+            position: relative;
+            border: 2px solid #000;
+            overflow: hidden;
+        }
+
+        .circle {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="clickableDiv"></div>
+
+    <script>
+        document.getElementById('clickableDiv').addEventListener('click', function (event) {
+
+            const rect = this.getBoundingClientRect(); // gives relative position 
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            // Create a new circle element
+            const circle = document.createElement('div');
+            circle.classList.add('circle');
+
+            // Position the circle at the click position
+            circle.style.left = `${x}px`;
+            circle.style.top = `${y}px`;
+
+            // Add the circle to the div
+            this.appendChild(circle);
+        });
+    </script>
+</body>
+
+</html>
